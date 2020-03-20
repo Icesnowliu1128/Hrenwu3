@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+        
+        fieldset {
+            width: 600px;
+            height: 280px;
+        }
+        
+        .skin {
+            width: 595px;
+            height: 60px;
+            margin-top: 35px;
+            border: solid 1px black;
+            padding-left: 0px;
+        }
+        
+        li {
+            width: 15px;
+            height: 30px;
+            float: left;
+            top: 15px;
+            margin-right: 5px;
+            margin-left: 5px;
+            position: relative;
+        }
+        
+        .selected {
+            top: 5px;
+        }
+        
+        #box {
+            width: 550px;
+            height: 60px;
+            margin-top: 35px;
+            margin-left: 22px;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend style="color:red; font-size: 40px; font-weight: 1000;">网页换肤</legend>
+        <ul class="skin">
+            <li class="0" title="蓝色" style="background-color: blue;"></li>
+            <li class="1" title="绿色" style="background-color: chartreuse;"></li>
+            <li class="2" title="红色" style="background-color: red;"></li>
+            <li class="3" title="灰色" style="background-color: slategray;"></li>
+            <li class="4" title="紫色" style="background-color: mediumorchid;"></li>
+            <li class="5" title="粉色" style="background-color: hotpink;"></li>
+
+        </ul>
+        <div id="box">
+            LocalStorage将数据保存在客户端本地的硬件设备中，即使浏览器被关闭了， 该数据仍然存在，下次打开浏览器访问网站时仍然可以继续使用。
+        </div>
+    </fieldset>
+</body>
+<script>
+     var littlelist = document.getElementsByTagName("li");
+    var tip = document.getElementById("box");
+    for(var i=0; i<6; i++){
+        littlelist[i].onclick = function(){
+            var k=this.className;
+            littlelist[k].style.marginTop="6px";
+            for(var j=0;j<6;j++){
+                if(j!=k){
+                    littlelist[j].style.marginTop="12px";
+                }
+            }
+            var col = this.style.backgroundColor;
+            tip.style.backgroundColor=col;
+            localStorage.setItem("backgroundColor",col);
+            localStorage.setItem("class",k);
+        }
+    }
+    if(localStorage.getItem("class")){
+        tip.style.backgroundColor=localStorage.getItem("backgroundColor");
+        var cla = localStorage.getItem("class");
+        littlelist[cla].style.marginTop="6px";
+    }
+    else{
+        littlelist[0].style.marginTop="6px";
+        tip.style.backgroundColor="violet";        
+    }
+    
+</script>
+
+</html>
